@@ -1,0 +1,301 @@
+/* =========================================================
+   Grupo VIP — Clínica Nívea Alves
+   Direção: high-ticket editorial · split portrait · earth tones
+   ID visual alinhada ao site: Cormorant Garamond + nude/rosé da marca
+   ========================================================= */
+
+:root{
+  --espresso:#15100C;
+  --espresso-deep:#0C0807;
+  --cream:#F4ECE1;
+  --muted:#B6A491;
+  --rose:#CBAA8C;
+  --rose-deep:#9C7B69;
+  --gold:#E3C690;
+  --ink-on-rose:#1B120C;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+
+body{
+  min-height:100vh;
+  min-height:100svh;
+  font-family:var(--sans);
+  color:var(--cream);
+  background:var(--espresso-deep);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+
+/* ---- Atmosfera: glow quente + grão + vinheta ---- */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:5;
+  background-image:
+    radial-gradient(135% 130% at 38% 45%, rgba(0,0,0,0) 56%, rgba(0,0,0,.42) 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='0.045'/></svg>");
+  mix-blend-mode:overlay;
+}
+
+/* ---- Stage / split layout ---- */
+.stage{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  isolation:isolate;
+  background:
+    radial-gradient(120% 95% at 80% 6%, rgba(203,170,140,.13) 0%, rgba(203,170,140,0) 46%),
+    radial-gradient(130% 110% at 6% 100%, rgba(156,123,105,.16) 0%, rgba(156,123,105,0) 52%),
+    linear-gradient(180deg,#1B140F 0%,var(--espresso) 46%,var(--espresso-deep) 100%);
+}
+
+/* ---- Retrato da Dra. Nívea (sangra à direita, funde no espresso) ---- */
+.portrait{
+  position:absolute;
+  inset:0 0 0 auto;
+  width:47%;
+  z-index:0;
+  margin:0;
+  overflow:hidden;
+}
+.portrait img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:62% 16%;
+  display:block;
+}
+.portrait::after{
+  /* fusão longa e suave da borda esquerda + topo/base no espresso */
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,
+      var(--espresso) 0%,
+      rgba(21,16,12,.92) 14%,
+      rgba(21,16,12,.6) 30%,
+      rgba(21,16,12,.28) 48%,
+      rgba(21,16,12,0) 72%),
+    linear-gradient(180deg,
+      rgba(12,8,7,.6) 0%,
+      rgba(12,8,7,0) 24%,
+      rgba(12,8,7,0) 74%,
+      rgba(12,8,7,.66) 100%);
+}
+
+/* ---- Moldura interna em fio dourado ---- */
+.stage::before{
+  content:"";
+  position:absolute;
+  inset:clamp(14px,2.2vw,28px);
+  border:1px solid rgba(227,198,144,.22);
+  z-index:4;
+  pointer-events:none;
+}
+
+/* ---- Conteúdo editorial (esquerda) ---- */
+.hero{
+  position:relative;
+  z-index:3;
+  width:min(57%,46rem);
+  padding:clamp(40px,6vh,76px) clamp(30px,6.4vw,104px);
+}
+
+.hero__logo{
+  width:clamp(168px,13vw,224px);
+  height:auto;
+  display:block;
+  margin-bottom:clamp(22px,3.6vh,40px);
+  filter:drop-shadow(0 6px 22px rgba(0,0,0,.5));
+}
+
+.hero__kicker{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  font-size:.7rem;
+  font-weight:500;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--rose);
+  margin-bottom:clamp(14px,2.2vh,22px);
+}
+.hero__kicker i{
+  flex:0 0 44px;
+  height:1px;
+  background:linear-gradient(90deg,var(--gold),rgba(227,198,144,0));
+}
+
+.hero__title{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:clamp(2.05rem,4.4vw,3.7rem);
+  line-height:1.08;
+  letter-spacing:-.008em;
+  color:var(--cream);
+  max-width:20ch;
+  text-wrap:balance;
+}
+.hero__title em{
+  font-style:italic;
+  font-weight:600;
+  color:transparent;
+  background:linear-gradient(98deg,var(--gold) 0%,var(--rose) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+}
+
+.hero__sub{
+  margin-top:clamp(16px,2.4vh,24px);
+  max-width:46ch;
+  font-size:clamp(.95rem,1.02vw,1.05rem);
+  line-height:1.64;
+  color:var(--muted);
+}
+
+/* ---- CTA — pílula nude/rosé da marca ---- */
+.cta{
+  --sheen:rgba(255,255,255,.34);
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  margin-top:clamp(22px,3.4vh,36px);
+  padding:1.05rem 2.2rem;
+  border-radius:999px;
+  font-family:var(--sans);
+  font-size:1rem;
+  font-weight:500;
+  letter-spacing:.012em;
+  color:var(--cream);
+  text-shadow:0 1px 2px rgba(27,18,12,.4);
+  text-decoration:none;
+  background:linear-gradient(135deg,var(--rose) 0%,var(--rose-deep) 78%);
+  border:1px solid rgba(227,198,144,.38);
+  box-shadow:0 18px 40px -16px rgba(156,123,105,.7),
+             inset 0 1px 0 rgba(255,255,255,.22);
+  overflow:hidden;
+  isolation:isolate;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease;
+}
+.cta__icon{flex:0 0 auto}
+.cta::after{
+  content:"";
+  position:absolute;
+  top:0;left:-60%;
+  width:40%;height:100%;
+  background:linear-gradient(100deg,transparent,var(--sheen),transparent);
+  transform:skewX(-18deg);
+  z-index:-1;
+  animation:sheen 6s ease-in-out 1.8s infinite;
+}
+@keyframes sheen{0%,70%{left:-60%}88%,100%{left:135%}}
+.cta:hover,.cta:focus-visible{
+  transform:translateY(-3px);
+  box-shadow:0 26px 54px -16px rgba(156,123,105,.85),
+             inset 0 1px 0 rgba(255,255,255,.28);
+}
+.cta:focus-visible{outline:2px solid var(--cream);outline-offset:4px}
+.cta:active{transform:translateY(-1px)}
+
+.hero__note{
+  margin-top:14px;
+  font-size:.82rem;
+  font-weight:500;
+  letter-spacing:.02em;
+  color:rgba(182,164,145,.8);
+}
+
+.sig{
+  margin-top:clamp(34px,7vh,68px);
+  font-size:.66rem;
+  font-weight:500;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:rgba(190,173,153,.62);
+}
+
+/* ---- Tablet ---- */
+@media (max-width:1080px){
+  .portrait{width:44%}
+  .hero{width:min(64%,42rem)}
+}
+
+/* ---- Mobile: foto alta no topo, dissolve longo, texto sobe sobre a área já 100% espresso (sem linha de corte, sem texto sobre o rosto) ---- */
+@media (max-width:860px){
+  .stage{
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+    background:linear-gradient(180deg,#1B140F 0%,var(--espresso) 34%,var(--espresso-deep) 100%);
+  }
+  .portrait{
+    position:relative;
+    inset:auto;
+    width:100%;
+    height:56vh;
+    min-height:360px;
+    flex:0 0 auto;
+  }
+  .portrait img{object-position:58% 8%}
+  .portrait::after{
+    /* dissolve longo: foto limpa no topo, 100% espresso bem antes da base */
+    background:
+      linear-gradient(180deg,
+        rgba(21,16,12,0) 0%,
+        rgba(21,16,12,0) 30%,
+        rgba(21,16,12,.16) 42%,
+        rgba(21,16,12,.45) 52%,
+        rgba(21,16,12,.78) 60%,
+        rgba(21,16,12,.95) 66%,
+        var(--espresso) 71%,
+        var(--espresso) 100%);
+  }
+  .hero{
+    width:100%;
+    flex:1 1 auto;
+    position:relative;
+    z-index:3;
+    margin-top:-17vh;            /* sobe sobre o trecho já 100% espresso */
+    padding:0 26px clamp(34px,6vh,54px);
+  }
+  .hero__logo{width:166px;margin-bottom:16px}
+  .hero__kicker{font-size:.64rem;letter-spacing:.24em;gap:12px;margin-bottom:14px}
+  .hero__kicker i{flex-basis:30px}
+  .hero__title{font-size:clamp(1.95rem,7.6vw,2.6rem);max-width:18ch}
+  .hero__sub{max-width:100%;margin-top:12px;line-height:1.58}
+  .cta{width:100%;justify-content:center;margin-top:20px}
+  .sig{margin-top:22px;font-size:.58rem;letter-spacing:.14em}
+  .stage::before{inset:10px;z-index:4}
+}
+
+@media (max-width:380px){
+  .portrait{height:52vh;min-height:320px}
+  .hero{margin-top:-15vh;padding-bottom:clamp(26px,5vh,42px)}
+  .hero__logo{width:152px;margin-bottom:14px}
+  .hero__title{font-size:1.82rem}
+  .hero__sub{font-size:.9rem;line-height:1.54;margin-top:11px}
+  .cta{font-size:.92rem;padding:.95rem 1.2rem;gap:9px;margin-top:18px;white-space:nowrap}
+  .cta__icon{width:18px;height:18px}
+}
+
+/* ---- Reduz movimento ---- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+  .cta::after{animation:none;display:none}
+  .cta{transition:none}
+}

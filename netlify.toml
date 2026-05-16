@@ -1,0 +1,48 @@
+[build]
+  publish = "."
+
+[dev]
+  publish = "."
+  port = 8888
+  framework = "#static"
+  autoLaunch = false
+
+# CDN de imagens (permite otimizar imagens locais via /.netlify/images)
+[images]
+  remote_images = ["https://.*"]
+
+# Headers de seguranca
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Imagens: hash/estaveis -> cache longo imutavel
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# CSS sem hash no nome (usa ?v=N como cache buster) -> NUNCA immutable
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# HTML sempre revalida
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

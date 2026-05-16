@@ -1,0 +1,19 @@
+# Netlify local
+.netlify
+
+# Sistema
+.DS_Store
+**/.DS_Store
+
+# Arquivos de processo (apenas local)
+briefing.md
+copy.md
+layout.md
+persona.md
+pesquisa-mercado.md
+tom-de-voz.md
+referencias/
+
+# Imagens NÃO usadas na LP (alternativas de foto — apenas local)
+images/alt-warm.webp
+images/alt-clinica.webp
